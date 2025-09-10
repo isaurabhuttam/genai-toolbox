@@ -33,7 +33,20 @@ tools:
         source: postgresql-source
         description: "Lists detailed schema information (object type, columns, constraints, indexes, triggers, owner, comment) as JSON for user-created tables (ordinary or partitioned). Filters by a comma-separated list of names. If names are omitted, lists all tables in user schemas."
 
+    get_query_plan:
+        kind: postgres-sql
+        source: postgresql-source
+        description: "Generate a PostgreSQL EXPLAIN plan in JSON format for a single SQL statement—without executing it. This returns the optimizer's estimated plan, costs, and rows (no ANALYZE, no extra options). Use in production safely for plan inspection, regression checks, and query tuning workflows."
+        statement: |
+            EXPLAIN (FORMAT JSON) {{.query}};
+        templateParameters:
+            - name: query
+              type: string
+              description: "The SQL statement for which you want to generate plan (omit the EXPLAIN keyword)."
+              required: true
+
 toolsets:
     postgres_database_tools:
         - execute_sql
         - list_tables
+        - get_query_plan
