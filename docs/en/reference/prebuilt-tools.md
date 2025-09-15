@@ -28,6 +28,7 @@ See guides, [Connect from your IDE](../how-to/connect-ide/_index.md), for detail
 *   **Tools:**
     *   `execute_sql`: Executes a SQL query.
     *   `list_tables`: Lists tables in the database.
+    *   `list_top_bloated_tables`: List top bloated tables in the database.
 
 ## AlloyDB Postgres Admin
 
@@ -101,6 +102,7 @@ See guides, [Connect from your IDE](../how-to/connect-ide/_index.md), for detail
 *   **Tools:**
     *   `execute_sql`: Executes a SQL query.
     *   `list_tables`: Lists tables in the database.
+    *   `list_top_bloated_tables`: List top bloated tables in the database.
 
 ## Cloud SQL for SQL Server
 
@@ -238,6 +240,7 @@ See guides, [Connect from your IDE](../how-to/connect-ide/_index.md), for detail
 *   **Tools:**
     *   `execute_sql`: Executes a SQL query.
     *   `list_tables`: Lists tables in the database.
+    *   `list_top_bloated_tables`: List top bloated tables in the database.
 
 ## Spanner (GoogleSQL dialect)
 

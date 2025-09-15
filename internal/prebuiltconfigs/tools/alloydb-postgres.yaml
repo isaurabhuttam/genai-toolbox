@@ -35,7 +35,33 @@ tools:
         source: alloydb-pg-source
         description: "Lists detailed schema information (object type, columns, constraints, indexes, triggers, owner, comment) as JSON for user-created tables (ordinary or partitioned). Filters by a comma-separated list of names. If names are omitted, lists all tables in user schemas."
 
+    list_top_bloated_tables:
+        kind: postgres-sql
+        source: alloydb-pg-source
+        description: |
+            List the top tables by dead-tuple (approximate bloat signal), returning schema, table, live/dead tuples, percentage, and last vacuum/analyze times.
+        statement: |
+            SELECT
+                schemaname AS schema_name,
+                relname AS relation_name,
+                n_live_tup AS live_tuples,
+                n_dead_tup AS dead_tuples,
+                TRUNC((n_dead_tup::NUMERIC / NULLIF(n_live_tup + n_dead_tup, 0)) * 100, 2) AS dead_tuple_percentage,
+                last_vacuum,
+                last_autovacuum,
+                last_analyze,
+                last_autoanalyze
+            FROM pg_stat_user_tables
+            ORDER BY n_dead_tup DESC
+            LIMIT COALESCE($1::int, 50);
+        parameters:
+            - name: limit
+              description: "The maximum number of results to return."
+              type: integer
+              default: 50
+
 toolsets:
     alloydb_postgres_database_tools:
         - execute_sql
         - list_tables
+        - list_top_bloated_tables
