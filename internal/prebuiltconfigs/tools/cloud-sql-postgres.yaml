@@ -34,7 +34,30 @@ tools:
         source: cloudsql-pg-source
         description: "Lists detailed schema information (object type, columns, constraints, indexes, triggers, owner, comment) as JSON for user-created tables (ordinary or partitioned). Filters by a comma-separated list of names. If names are omitted, lists all tables in user schemas."
 
+    list_memory_configurations:
+        kind: postgres-sql
+        source: cloudsql-pg-source
+        description: "List PostgreSQL memory-related configurations (name and current setting) from pg_settings."
+        statement: |
+            (
+                SELECT
+                name,
+                pg_size_pretty((setting::bigint * 1024)::bigint) setting
+                FROM pg_settings
+                WHERE name IN ('work_mem', 'maintenance_work_mem')
+            )
+            UNION ALL
+            (
+                SELECT
+                name,
+                pg_size_pretty((((setting::bigint) * 8) * 1024)::bigint)
+                FROM pg_settings
+                WHERE name IN ('shared_buffers', 'wal_buffers', 'effective_cache_size', 'temp_buffers')
+            )
+            ORDER BY 1 DESC;
+
 toolsets:
     cloud_sql_postgres_database_tools:
         - execute_sql
         - list_tables
+        - list_memory_configurations
