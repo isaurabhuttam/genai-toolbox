@@ -33,7 +33,7 @@ See guides, [Connect from your IDE](../how-to/connect-ide/_index.md), for detail
     *   `list_top_bloated_tables`: List top bloated tables in the database.
     *   `list_replication_slots`: Lists replication slots in the database.
     *   `list_invalid_indexes`: Lists invalid indexes in the database.
-    *   `get_query_plan`: Generate EXPLAIN plan in json format.
+    *   `get_query_plan`: Generate the execution plan of a statement.
 
 ## AlloyDB Postgres Admin
 
@@ -113,7 +113,7 @@ See guides, [Connect from your IDE](../how-to/connect-ide/_index.md), for detail
     *   `list_top_bloated_tables`: List top bloated tables in the database.
     *   `list_replication_slots`: Lists replication slots in the database.
     *   `list_invalid_indexes`: Lists invalid indexes in the database.
-    *   `get_query_plan`: Generate EXPLAIN plan in json format.
+    *   `get_query_plan`: Generate the execution plan of a statement.
 
 ## Cloud SQL for SQL Server
 
@@ -256,7 +256,7 @@ See guides, [Connect from your IDE](../how-to/connect-ide/_index.md), for detail
     *   `list_top_bloated_tables`: List top bloated tables in the database.
     *   `list_replication_slots`: Lists replication slots in the database.
     *   `list_invalid_indexes`: Lists invalid indexes in the database.
-    *   `get_query_plan`: Generate EXPLAIN plan in json format.
+    *   `get_query_plan`: Generate the execution plan of a statement.
 
 ## Spanner (GoogleSQL dialect)
 
